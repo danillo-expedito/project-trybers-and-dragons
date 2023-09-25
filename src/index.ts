@@ -22,8 +22,7 @@ const pve = new PVE(player1, [monster1, monster2]);
 
 function runBattles(battles: Battle[]) {
   for (let b = 0; b < battles.length; b += 1) {
-    const battle = battles[b];
-    battle.fight();
+    battles[b].fight();
   }
 }
 // ------------------------------------------ //
