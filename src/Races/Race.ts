@@ -1,5 +1,5 @@
 abstract class Race {
-  private static racesInstances = 0;
+  public static racesInstances = 0;
 
   constructor(private _name: string, private _dexterity: number) {}
 
