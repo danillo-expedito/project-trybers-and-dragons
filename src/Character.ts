@@ -33,33 +33,13 @@ class Character implements Fighter {
       type_: this._archetype.energyType, amount: getRandomInt(1, 10) };
   }
 
-  race(): Race {
-    return this._race;
-  }
-
-  archetype(): Archetype {
-    return this._archetype;
-  }
-
-  get lifePoints() {
-    return this._lifePoints;
-  }
-
-  get strength(): number {
-    return this._strength;
-  }
-
-  get defense(): number {
-    return this._defense;
-  }
-
-  get dexterity(): number {
-    return this._dexterity;
-  }
-
-  get energy(): Energy {
-    return { ...this._energy };
-  }
+  get race(): Race { return this._race; }
+  get archetype(): Archetype { return this._archetype; }
+  get lifePoints() { return this._lifePoints; }
+  get strength(): number { return this._strength; }
+  get defense(): number { return this._defense; }
+  get dexterity(): number { return this._dexterity; }
+  get energy(): Energy { return { ...this._energy }; }
 
   receiveDamage(attackPoints: number): number {
     const damage = attackPoints - this._defense;
@@ -78,23 +58,18 @@ class Character implements Fighter {
     enemy.receiveDamage(attackPoints);
   }
 
-  levelUp() {
+  levelUp(): void {
     this._dexterity += getRandomInt(1, 10);
     this._strength += getRandomInt(1, 10);
     this._defense += getRandomInt(1, 10);
     this._energy.amount = 10;
+    this.maxLifePoints += getRandomInt(1, 10);
 
-    const lifePointsUpgrade = getRandomInt(1, 10);
-
-    if (this._lifePoints < this._race.maxLifePoints) {
-      this.maxLifePoints += lifePointsUpgrade;
-      this._lifePoints += lifePointsUpgrade;
-      if (this.maxLifePoints > this._race.maxLifePoints 
-        || this._lifePoints > this._race.maxLifePoints) {
-        this.maxLifePoints = this._race.maxLifePoints;
-        this._lifePoints = this.maxLifePoints;
-      }
+    if (this.maxLifePoints > this.race.maxLifePoints) {
+      this.maxLifePoints = this.race.maxLifePoints;
     }
+
+    this._lifePoints = this.maxLifePoints;
   }
 
   special(): void {
