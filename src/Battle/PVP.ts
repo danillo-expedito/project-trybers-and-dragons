@@ -7,20 +7,31 @@ class PVP extends Battle {
     super.fight();
   }
     
+  playerTurn() {
+    this.player.attack(this.enemy);
+    if (this.enemy.lifePoints === -1) {
+      return 1;
+    }
+  }
+
+  enemyTurn() {
+    this.enemy.attack(this.player);
+    if (this.player.lifePoints === -1) {
+      return -1;
+    }
+  }
+
   fight(): number {
-    while (true) {
-      this.player.attack(this.enemy);
+    while (this.player.lifePoints > -1 && this.enemy.lifePoints > -1) {
+      this.playerTurn();
 
-      if (this.enemy.lifePoints === -1) {
-        return 1;
-      }
-
-      this.enemy.attack(this.player);
-
-      if (this.player.lifePoints === -1) {
+      const playerLost = this.enemyTurn();
+      if (playerLost) {
         return -1;
       }
     }
+
+    return 1;
   }
 }
 
