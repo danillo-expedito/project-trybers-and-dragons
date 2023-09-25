@@ -1,3 +1,3 @@
-import Fighter from './FIghter';
+import Fighter from './Fighter';
 
 export default Fighter;
